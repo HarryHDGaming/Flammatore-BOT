@@ -14,13 +14,12 @@ client.on('interactionCreate', (interaction) => {
 
 client.on("messageCreate", (message) => {
     if(message.content == "!comandi") {
-        message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_|_!ComandiMusicBot")
+        message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_")
+    }
+    if(message.content == "!MusicBot") {
+        message.channel.send("!play | !pause | !resume")
     }
     
-    if(message.content == "!ComandiMusicBot") {
-        message.channel.send("_!play_|_!pause_|_!resume_")
-    }
-
     if(message.content == "!youtube"){
         message.channel.send("questo è il mio canale https://www.youtube.com/channel/UCNDXC4L8bA_X4vEh9_cJBqg")
     }
