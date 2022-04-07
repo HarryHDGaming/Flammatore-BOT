@@ -69,9 +69,9 @@ const { SoundCloudPlugin } = require("@distube/soundcloud")
 
 const distube = new Distube(client, {
     youtubeDL: false
-    plugins: [new SpotifyPlugin(), new SoundCloudPlugin()],
-    leaveOnEmpty: true,
-    leaveOnStop: true
+   // plugins: [new SpotifyPlugin(), new SoundCloudPlugin()],
+    //leaveOnEmpty: true,
+    //leaveOnStop: true
 })
 
 client.on("messageCreate", message => {
