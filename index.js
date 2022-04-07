@@ -16,6 +16,7 @@ client.on("messageCreate", (message) => {
     if(message.content == "!comandi") {
         message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_")
     }
+
     if(message.content == "!MusicBot") {
         message.channel.send("!play | !pause | !resume")
     }
@@ -138,11 +139,9 @@ client.on("messageCreate", message => {
         }catch{
             return message.channel.send("Nessuna canzone in riproduzione o canzone gia in riproduzione")
         }
-
-
         message.channel.send("Song resumed")
     }
-
+})
 distube.on("addsong", (queue, song) => {
     var embed = new Discord.MessageEmbed()
         .setTitle("Song added")
