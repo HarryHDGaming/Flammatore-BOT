@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client({intents:["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES"]})
+const client = new Discord.Client({intents:["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_VOICE_STATES"]})
 
 
 
@@ -14,9 +14,13 @@ client.on('interactionCreate', (interaction) => {
 
 client.on("messageCreate", (message) => {
     if(message.content == "!comandi") {
-        message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_")
+        message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_|_!ComandiMusicBot")
     }
     
+    if(message.content == "!ComandiMusicBot") {
+        message.channel.send("_!play_|_!pause_|_!resume_")
+    }
+
     if(message.content == "!youtube"){
         message.channel.send("questo è il mio canale https://www.youtube.com/channel/UCNDXC4L8bA_X4vEh9_cJBqg")
     }
@@ -59,3 +63,104 @@ client.on("messageCreate", (message) => {
         message.channel.send("il mio canale Twitch https://www.twitch.tv/harryhdgaming92")
     }
 });
+const { Distube, Plugin } = require("distube")
+const { SpotifyPlugin } = require("@distube/spotify")
+const { SoundCloudPlugin } = require("@distube/soundcloud")
+
+const distube = new Distube(client, {
+    youtubeDL: false
+    plugins: [new SpotifyPlugin(), new SoundCloudPlugin()],
+    leaveOnEmpty: true,
+    leaveOnStop: true
+})
+
+client.on("messageCreate", message => {
+    if(message.content.startsWith("!play")) {
+        const voiceChannel = message.member.voice.channel
+        if(!voiceChannel){
+            return message.channel.send("Devi essere in un canale vocale")
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if(voiceChannelBot && voiceChannel.id != VoiceChannel.id){
+            return message.channel.send("Qualcuno sta gia ascoltando della musica")
+        }
+
+        let args = message.content.split(/\s+/)
+        let query = args.slice(1).join(" ")
+
+        if(!query) {
+            return message.channel.send("inserisci la canzone da ascoltare")
+        }
+
+        distube.play(voiceChannelBot || voiceChannel, query, {
+            member: message.member,
+            textChannel: message.channel,
+            message: message
+        })
+    }
+})
+client.on("messageCreate", message => {
+    if(message.content.startsWith("!pause")) {
+        const voiceChannel = message.member.voice.channel
+        if(!voiceChannel){
+            return message.channel.send("Devi essere in un canale vocale")
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if(voiceChannelBot && voiceChannel.id != VoiceChannel.id){
+            return message.channel.send("Qualcuno sta gia ascoltando della musica")
+        }
+
+        try {
+            distube.pause(message)
+        }catch{
+            return message.channel.send("Nessuna canzone in riproduzione o canzone gia in pausa")
+        }
+
+
+        message.channel.send("Song paused")
+    }
+})
+client.on("messageCreate", message => {
+    if(message.content.startsWith("!resume")) {
+        const voiceChannel = message.member.voice.channel
+        if(!voiceChannel){
+            return message.channel.send("Devi essere in un canale vocale")
+        }
+
+        const voiceChannelBot = message.guild.channels.cache.find(x => x.type == "GUILD_VOICE" && x.members.has(client.user.id))
+        if(voiceChannelBot && voiceChannel.id != VoiceChannel.id){
+            return message.channel.send("Qualcuno sta gia ascoltando della musica")
+        }
+
+        try {
+            distube.resume(message)
+        }catch{
+            return message.channel.send("Nessuna canzone in riproduzione o canzone gia in riproduzione")
+        }
+
+
+        message.channel.send("Song resumed")
+    }
+
+distube.on("addsong", (queue, song) => {
+    var embed = new Discord.MessageEmbed()
+        .setTitle("Song added")
+        .addField("Song", song.name)
+
+    queue.textChannel.send({embeds: [embed] })
+
+})
+distube.on("playsong", (queue, song) => {
+    var embed = new Discord.MessageEmbed()
+        .setTitle("Playing song...")
+        .addField("Song", song.name)
+        .addField("Requested by", song.user.toString())
+
+    queue.textChannel.send({embeds: [embed] })
+})
+
+distube.on("serchNoResult", (message, query) => {
+    message.channel.send("Canzone non trovata...")
+})
