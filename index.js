@@ -14,7 +14,7 @@ client.on('interactionCreate', (interaction) => {
 
 client.on("messageCreate", (message) => {
     if(message.content == "!comandi") {
-        message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_|_!Regolamento_|_!AggiornamentoBot")
+        message.channel.send("_!youtube_|_!youtube2_|_!istagram_|_!istagram2_|_!telegram_|_!moduloiscrizione_|_!modulocreazioneclan_|_!Flame_|_!Regolamento_|_!AggiornamentoBot_|_!MusicBot (Coming Soon)")
     }
 
     if(message.content == "!MusicBot") {
