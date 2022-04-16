@@ -65,6 +65,14 @@ client.on("messageCreate", (message) => {
     if(message.content == "!AggiornamentoBot") {
         message.channel.send("Stiamo Lavorando per rendere il bot musicale.")
     }
+    if(message.content == "!Regolamento") {
+        var embed = new Discord.MessageEmbed()
+            .setTitle("Regolamento Della Community")
+            .setDescription(" Nono Sono consentiti: 1.Insulti personali tra i partecipanti: toni irrispettosi verso i moderatori o gli amministratori del discord della Community del Flame: le discussioni e le espressioni usate devono essere sempre pacate, pur trovandosi in disaccordo su certe questioni; 2. Offese alle istituzioni o alla religione di qualunque fede Saranno punite con il ban; 3.Messaggi non inerenti alle tematiche proposte o non idonei alle finalità della Community; 4.Commenti in chiave sarcastica, beffeggiatoria, sacrilega e denigratoria; 5. Sono inoltre vietati: il razzismo ed ogni apologia dell’inferiorità o superiorità di una razza rispetto alle atre; 6. Atteggiamenti e/o posizioni di contestazione, presi a titolo gratuito, palesemente ostili nei confronti dei moderatori e degli amministratori; 7.Incitamento al mancato rispetto delle presenti regole miranti alla esclusiva destabilizzazione della normale e pacifica partecipazione attiva ed agli altri servizi della Community; 8.Il pubblicare immagini ritenute oscene ed offensive della sensibilità dei singoli: queste verranno immediatamente rimosse e ci sarà un richiami dopo 10 richiami c'è rischio Ban!; 9.Pubblicare Link di altre community non sarà tollerato dalla community stessa o link di altri discord; 10.Pubblicare messaggi che in qualche modo creano disordine nella Community o possano creare danni d’immagine o all’esistenza stessa della Community; 11.Non insistere nell’inviare messaggi in privato (PVT) quando l’utente che li riceve si dimostra seccato e infastidito dagli stessi; 12.Usare correttamente le icone che se ripetute continuamente disturbano la comunicazione in chat; 13.Fare attenzione e limitare l’uso delle maiuscole che nel linguaggio di chat significano “urlare a qualcuno”;")
+            .setDescription("---Avviso---: inoltre Esistono i Richiami, cioè delle ammunizioni che sono basate da dei permessi che limiteranno la partecipazioni alla community: Esempio: se un utente arriva al 3 richiamo puo rischiare il Ban!")
+            .setThumbnail("https://img.myloview.it/adesivi/fire-flame-logo-vector-illustration-design-template-vector-fire-flames-sign-illustration-isolated-fire-icon-400-175013634.jpg")
+       message.channel.send({embeds: [embed]}) 
+    }
 });
 const { Distube, Plugin } = require("distube")
 const { SpotifyPlugin } = require("@distube/spotify")
