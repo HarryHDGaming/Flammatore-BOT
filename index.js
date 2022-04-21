@@ -74,9 +74,9 @@ client.on("messageCreate", (message) => {
        message.channel.send({embeds: [embed]}) 
     }
 });
-const { Distube, Plugin } = require("distube")
-const { SpotifyPlugin } = require("@distube/spotify")
-const { SoundCloudPlugin } = require("@distube/soundcloud")
+//const { Distube, Plugin } = require("distube")
+//const { SpotifyPlugin } = require("@distube/spotify")
+//const { SoundCloudPlugin } = require("@distube/soundcloud")
 
 //const distube = new Distube(client, {
     //youtubeDL: false
